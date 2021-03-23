@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react"
 import './App.css';
+import QuotesGenerator from "./quotes.js"
+import ClockZone from "./clock.js"
+import MoreInfo from "./moreInfo.js"
+import Info from "./info.js"
 
-function App() {
+export default function App() {
+
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="root">
+      <div className="body-main">
+        <div className="main-container">
+          <div className="content-container">
+            {!expanded && <QuotesGenerator />}
+            <div className="clock-content">
+              <ClockZone />
+              <MoreInfo setExpanded={setExpanded} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {expanded && <div id="lower-container"><Info /></div>}
     </div>
-  );
+  )
 }
 
-export default App;
